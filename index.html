@@ -7,7 +7,7 @@
             // console.log(event.origin.search("localhost"));
             // console.log(event.origin.search("mynexthire.com") > -1 || event.origin.search("localhost") > -1);
             if(event.origin.search("mynexthire.com") > -1 || event.origin.search("localhost") > -1){
-                alert(JSON.stringify(event))
+                alert(JSON.stringify(event.origin))
                 document.location.href = event.data;
             }
         }
