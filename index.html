@@ -2,11 +2,12 @@
     <script>
         //solution to open pages in the same tab
         function receiveMessage(event){
-            console.log(event.origin);
-            console.log(event.origin.search("mynexthire.com"));
-            console.log(event.origin.search("localhost"));
-            console.log(event.origin.search("mynexthire.com") > -1 || event.origin.search("localhost") > -1);
+            // console.log(event.origin);
+            // console.log(event.origin.search("mynexthire.com"));
+            // console.log(event.origin.search("localhost"));
+            // console.log(event.origin.search("mynexthire.com") > -1 || event.origin.search("localhost") > -1);
             if(event.origin.search("mynexthire.com") > -1 || event.origin.search("localhost") > -1){
+                alert(JSON.stringify(event))
                 document.location.href = event.data;
             }
         }
