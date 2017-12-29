@@ -25,7 +25,7 @@
                     host = "pushkar.iqa.mynexthire.com";
                 }
                 var logo = host.split(".")[0] + "_color.png";
-                document.getElementById("clientLogo").src = "https://s3.amazonaws.com/smaclifywow.resource/client_logo/" + logo;
+                // document.getElementById("clientLogo").src = "https://s3.amazonaws.com/smaclifywow.resource/client_logo/" + logo;
                 
                 if (window.location.origin === undefined || window.location.origin === null) {
                     window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
@@ -39,7 +39,7 @@
                 } else{
                     // var iFrameSrc = document.getElementById("mnhembedded").src;
                     // document.getElementById("mnhembedded").src = iFrameSrc + "#" + window.parent.location.search;
-                    document.getElementById("mnhembedded").src = "http://localhost:8080/employer/jobs/careers" + "#" + window.parent.location.search;
+                    document.getElementById("mnhembedded").src = "https://pushkar.mynexthire.com/employer/jobs/careers" + "#" + window.parent.location.search;
                 }            
                 //alert("I'm from main page script; Top is:" +  myUrl + " and iframe is :" + document.getElementById("mnhembedded").src);    
             }
