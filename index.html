@@ -2,6 +2,7 @@
     <script>
         //solution to open pages in the same tab
         function receiveMessage(event){
+            console.log(event);
             if(event.origin.search("mynexthire.com") > -1 || event.origin.search("localhost") > -1){
                 document.location.href = event.data;
             }
