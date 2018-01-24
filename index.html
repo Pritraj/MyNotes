@@ -28,10 +28,10 @@
     //setup iframe with mynexthire content
     document.onreadystatechange = function(e){
         if(document.readyState === "complete"){
-            var host = window.parent.location.host;
-            if(host === "localhost:8080"){
-                host = "pushkar.iqa.mynexthire.com";
-            }
+//             var host = window.parent.location.host;
+//             if(host === "localhost:8080"){
+//                 host = "pushkar.iqa.mynexthire.com";
+//             }
             // var logo = host.split(".")[0] + "_color.png";
             // document.getElementById("clientLogo").src = "https://s3.amazonaws.com/smaclifywow.resource/client_logo/" + logo;
             
@@ -55,7 +55,7 @@
 </script>
 <iframe 
     class="col-xs-12 panel panel-default"
-    style="border:none;padding:1vh;height:100vh;"
+    style="border:none;padding:1vh;height:100vh;width:100%"
     id="mnhembedded"
     src="https://pushkar.iqa.mynexthire.com/employer/jobs/careers#?src=careers&bufilter=2">
 </iframe>
