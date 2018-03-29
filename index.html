@@ -1,4 +1,70 @@
-<div class="row"><script src="https://pushkar.iqa.mynexthire.com/employer/ui/js/jobboard/careers-integration.js"></script>
+<div class="row">
+<script>
+
+//------------------------------------------------------------------------------------------------------------------
+//solution to open pages in the same tab
+//------------------------------------------------------------------------------------------------------------------
+    function mnh_ci_receiveMessage(event){
+        if(event.origin.search("mynexthire.com") > -1 || event.origin.search("localhost") > -1){
+            if(event.data != null && event.data != "" && event.data != undefined){
+                var msg = '' + event.data;
+                switch(true){
+                    case (msg.search("http") > -1):
+                        document.location.href = msg;
+                        break;
+                    
+                    case (msg.search("height->change") > -1):
+                        var height = msg.substring(("height->change").length);
+                        document.getElementById('mnhembedded').style.height = (parseInt(height) + 30) + "px";
+                        break;
+                    
+                    case (msg.search("scroll->top") > -1) :
+                        scroll(0, 0);
+                        break;
+                }
+            }
+        }
+    }
+    window.addEventListener("message", mnh_ci_receiveMessage, false);
+
+//------------------------------------------------------------------------------------------------------------------
+//setup iframe with mynexthire content
+//------------------------------------------------------------------------------------------------------------------
+    function mnh_ci_onreadystatechange (pageType, clientShortName){
+        //Determine the current page that is hosting mnh iframe
+        if (window.location.origin === undefined || window.location.origin === null) {
+            window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
+        }
+        var holdingPageOrigin = (window.location.origin).toLowerCase();
+
+        //Determine url suffix
+        var urlSuffix = window.parent.location.search;
+        if(pageType === "referrals"){
+            urlSuffix += urlSuffix === ""? "?src=refer&page=referrals":"&page=referrals";
+        }else{
+            urlSuffix += urlSuffix === ""? "?src=careers&page=careers":"&page=careers";
+        }
+        
+        //Setup iframe src
+        var iFrameSrc = "";
+        switch(true){
+            //Localhost development
+            case (holdingPageOrigin === "http://localhost:8080"):
+                iFrameSrc = "http://localhost:8080/employer/jobs/careers";
+                break;
+            
+            //Default MNH pages
+            case (holdingPageOrigin.indexOf("mynexthire.com", holdingPageOrigin.length - 14) != -1):
+                iFrameSrc = holdingPageOrigin + "/employer/jobs/careers";
+                break;
+
+            //Client's website or intranet page
+            default:
+                iFrameSrc = "https://" + clientShortName + ".mynexthire.com/employer/jobs/careers";
+        }
+        document.getElementById("mnhembedded").src = iFrameSrc + "#" + urlSuffix;
+    };  
+</script>
 <script>function mynexthire_ci_onreadystatechange (pageType, clientShortName){var urlSuffix = window.parent.location.search;if(pageType === "referrals"){urlSuffix += urlSuffix === ""? "?src=refer&page=referrals":"&page=referrals";}else{urlSuffix += urlSuffix === ""? "?src=careers&page=careers":"&page=careers";}document.getElementById("mnhembedded").src = "https://pushkar.iqa.mynexthire.com/employer/jobs/careers" + "#" + urlSuffix;};document.onreadystatechange = function(e){if(document.readyState === "complete"){mynexthire_ci_onreadystatechange('careers', 'pushkar.iqa');}}</script>
 <iframe id="mnhembedded" class="col-xs-12" style="height: 800px; width: 940px; border: none; margin-top: -5vh;" src="" width="300" height="150">
 </iframe></div>
